@@ -4,14 +4,6 @@
 #
 # === Parameters
 #
-# [*use_ramdisk*]
-#   Boolean. Mounts a ramdisk, uses the $profiledatadir for the 
-#   base of the RAM disk. $profiledatadir must not be left default
-#   and the directory must exist already (Puppet parent limitation).
-#
-# [*ramdisk_size*]
-#   String. The size of the RAM disk if $use_ramdisk is true.
-#
 # [*basedir*]
 #   String. Base directory for nfsen.
 #
@@ -105,6 +97,18 @@
 # [*sources*]
 #   Array of Hashes. See examples.
 #
+# [*version*]
+#   String. Version of nfsen to install when not using a custom repository source
+#
+# [*custom_repo*]
+#   Boolean. Whether to source the NfSen repository from a custom source (via vcsrepo)
+#
+# [*custom_repo_provider*]
+#   String. Custom repositiory provider e.g. git
+#
+# [*custom_repo_source*]
+#   String. Where the custom repository resides
+#
 # [*web*]
 #   Boolean.  Whether to install the secure web frontend
 #
@@ -115,8 +119,6 @@
 #   Integer.  Number of (intermediate) CA certificates to verify
 #
 class nfsen (
-  $use_ramdisk = false,
-  $ramdisk_size = '0M',
   $basedir = '/var/lib/nfsen',
   $bindir = '${BASEDIR}/bin',
   $libexecdir = '${BASEDIR}/libexec',
@@ -156,18 +158,26 @@ class nfsen (
       type => 'netflow',
     },
   ],
+  $version = '1.3.6p1',
+  $custom_repo = false,
+  $custom_repo_provider = undef,
+  $custom_repo_source = undef,
   $web = true,
   $web_ssl_verify_client = 'none',
   $web_ssl_verify_depth = 1,
 ) {
 
+  include ::nfsen::nfdump
+  include ::nfsen::repo
   include ::nfsen::install
   include ::nfsen::configure
   include ::nfsen::service
   include ::nfsen::web
 
+  Class['::nfsen::nfdump'] ->
+  Class['::nfsen::repo'] ->
   Class['::nfsen::install'] ->
-  Class['::nfsen::configure'] ~>
+  Class['::nfsen::configure'] ->
   Class['::nfsen::service'] ->
   Class['::nfsen::web']
 

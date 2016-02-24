@@ -12,15 +12,15 @@ class nfsen::web {
     include ::apache::mod::php
     include ::apache::mod::ssl
 
-    apache::vhost { "${::fqdn}":
+    apache::vhost { 'nfsen':
       servername      => $::fqdn,
       port            => 80,
       docroot         => '/var/www/html',
       redirect_status => 'permanent',
       redirect_dest   => "https://${::fqdn}",
-    }
+    } ->
 
-    apache::vhost { "${::fqdn}_ssl":
+    apache::vhost { 'nfsen_ssl':
       servername        => $::fqdn,
       port              => 443,
       docroot           => '/var/www/html',
@@ -31,7 +31,7 @@ class nfsen::web {
       ssl_crl           => '/var/lib/puppet/ssl/crl.pem',
       ssl_verify_client => $::nfsen::web_ssl_verify_client,
       ssl_verify_depth  => $::nfsen::web_ssl_verify_depth,
-    }
+    } ->
 
     # Link in the web frontend
     file { "${::nfsen::htmldir}/index.php":

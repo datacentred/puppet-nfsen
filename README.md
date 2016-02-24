@@ -29,7 +29,6 @@ The following modules are required:
 * http://github.com/puppetlabs/puppetlabs-apache
 * http://github.com/puppetlabs/puppetlabs-stdlib
 * http://github.com/puppetlabs/puppetlabs-vcsrepo
-* http://github.com/jvoss/puppet-module-nfdump
 
 ## Usage
 
@@ -45,7 +44,6 @@ via hiera
 ```yaml
 apache::default_vhost: false
 apache::mpm_module: 'prefork'
-nfdump::use_with_nfsen: true
 ```
 
 ## Limitations
