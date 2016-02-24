@@ -1,5 +1,7 @@
 # NfSen
 
+[![Build Status](https://travis-ci.org/datacentred/puppet-nfsen.png?branch=master)](https://travis-ci.org/datacentred/puppet-nfsen)
+
 #### Table Of Contents
 
 1. [Overview](#overview)

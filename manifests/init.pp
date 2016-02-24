@@ -152,10 +152,10 @@ class nfsen (
   $mail_body = 'q{ Alert \'@alert@\' triggered at timeslot @timeslot@ };',
   $sources = [
     {
-      name => 'all',
-      port => '9995',
-      col  => '#0000ff',
-      type => 'netflow',
+      'name' => 'all',
+      'port' => '9995',
+      'col'  => '#0000ff',
+      'type' => 'netflow',
     },
   ],
   $version = '1.3.6p1',
