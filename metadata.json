@@ -1,6 +1,6 @@
 {
   "name": "datacentred-nfsen",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "DataCentred Ltd",
   "license": "GPL-3.0",
   "summary": "NfSen Orchestration",
@@ -12,7 +12,7 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [ "14.04" ]
-    },
+    }
   ],
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">=4.6.0" },
