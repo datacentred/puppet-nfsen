@@ -4,6 +4,10 @@ describe 'nfsen' do
   context 'default server' do
 
     it 'provisions with no errors' do
+      # **Hack**
+      # install.pl will fail when the first semaphore returned is zero due to
+      # broken return code checks
+      shell('ipcmk -S 1')
       # Create a CA and certificate for the web server
       shell('puppet cert generate $(facter fqdn)')
       # Add in an MPM module for mod_php
