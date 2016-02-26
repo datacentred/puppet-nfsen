@@ -8,34 +8,34 @@
 #   String. Base directory for nfsen.
 #
 # [*bindir*]
-#   String. Default '${BASEDIR}/bin'
+#   String. Default '/var/lib/nfsen/bin'
 #
 # [*libexecdir*]
-#   String. Default '${BASEDIR}/libexec'
+#   String. Default '/var/lib/nfsen/libexec'
 #
 # [*confdir*]
-#   String. Default '${BASEDIR}/etc'
+#   String. Default '/var/lib/nfsen/etc'
 #
 # [*htmldir*]
 #   String. Default '/var/www/nfsen'
 #
 # [*docdir*]
-#   String. Default '${BASEDIR}/doc'
+#   String. Default '/var/lib/nfsen/doc'
 #
 # [*vardir*]
-#   String. Default '${BASEDIR}/var'
+#   String. Default '/var/lib/nfsen/var'
 #
 # [*piddir*]
-#   String. Default '${BASEDIR}/run'
+#   String. Default '/var/lib/nfsen/run'
 #
 # [*filterdir*]
-#   String. Default '${BASEDIR}/filters'
+#   String. Default '/var/lib/nfsen/filters'
 #
 # [*formatdir*]
-#   String. Default '${BASEDIR}/fmt',
+#   String. Default '/var/lib/nfsen/fmt',
 #
 # [*profilestatdir*]
-#   String. Default '${BASEDIR}/profiles-stat',
+#   String. Default '/var/lib/nfsen/profiles-stat',
 #
 # [*profiledatadir*]
 #   String. Default "#{BASEDIR}/profiles-data',
@@ -50,7 +50,7 @@
 #   String. Default '/usr/bin',
 #
 # [*commsocket*]
-#   String. Default '${PIDDIR}/nfsen.comm',
+#   String. Default '/var/lib/nfsen/run/nfsen.comm',
 #
 # [*user*]
 #   String. Default 'netflow',
@@ -120,21 +120,21 @@
 #
 class nfsen (
   $basedir = '/var/lib/nfsen',
-  $bindir = '${BASEDIR}/bin',
-  $libexecdir = '${BASEDIR}/libexec',
-  $confdir = '${BASEDIR}/etc',
+  $bindir = '/var/lib/nfsen/bin',
+  $libexecdir = '/var/lib/nfsen/libexec',
+  $confdir = '/var/lib/nfsen/etc',
   $htmldir = '/var/www/html/nfsen/',
-  $docdir = '${BASEDIR}/doc',
-  $vardir = '${BASEDIR}/var',
-  $piddir = '${BASEDIR}/run',
-  $filterdir = '${VARDIR}/filters',
-  $formatdir = '${VARDIR}/fmt',
-  $profilestatdir = '${BASEDIR}/profiles-stat',
-  $profiledatadir = '${BASEDIR}/profiles-data',
-  $backend_plugindir = '${BASEDIR}/plugins',
-  $frontend_plugindir = '${HTMLDIR}/plugins',
+  $docdir = '/var/lib/nfsen/doc',
+  $vardir = '/var/lib/nfsen/var',
+  $piddir = '/var/lib/nfsen/run',
+  $filterdir = '/var/lib/nfsen/var/filters',
+  $formatdir = '/var/lib/nfsen/var/fmt',
+  $profilestatdir = '/var/lib/nfsen/profiles-stat',
+  $profiledatadir = '/var/lib/nfsen/profiles-data',
+  $backend_plugindir = '/var/lib/nfsen/plugins',
+  $frontend_plugindir = '/var/www/html/nfsen/plugins',
   $prefix = '/usr/bin',
-  $commsocket = '${PIDDIR}/nfsen.comm',
+  $commsocket = '/var/lib/nfsen/run/nfsen.comm',
   $user = 'netflow',
   $wwwuser = 'www-data',
   $wwwgroup = 'www-data',
