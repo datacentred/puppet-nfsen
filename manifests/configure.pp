@@ -54,7 +54,9 @@ class nfsen::configure {
     content => template('nfsen/nfsen.conf.erb'),
   } ->
 
-  exec { '/opt/nfsen/install.pl etc/nfsen.conf':
+  # Prompts for perl path *sigh*
+  # TODO: perhaps 'echo ${perl_path}' rather than 'yes'
+  exec { 'yes "" | /opt/nfsen/install.pl etc/nfsen.conf':
     cwd     => '/opt/nfsen',
     creates => $_basedir,
   }
