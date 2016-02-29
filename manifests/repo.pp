@@ -5,15 +5,15 @@
 class nfsen::repo {
 
   if $::nfsen::custom_repo {
-    #git package has to be installed prior to using vcsrepo
+
+    # Installs the repo from a customized source e.g. github
     ensure_packages('git')
 
     Package['git'] ->
 
-    # Installs the repo from a customized source e.g. github
     vcsrepo { '/opt/nfsen':
       ensure   => present,
-      provider => $::nfsen::custom_repo_provider,
+      provider => 'git',
       source   => $::nfsen::custom_repo_source,
     }
 

@@ -103,9 +103,6 @@
 # [*custom_repo*]
 #   Boolean. Whether to source the NfSen repository from a custom source (via vcsrepo)
 #
-# [*custom_repo_provider*]
-#   String. Custom repositiory provider e.g. git
-#
 # [*custom_repo_source*]
 #   String. Where the custom repository resides
 #
@@ -160,7 +157,6 @@ class nfsen (
   ],
   $version = '1.3.6p1',
   $custom_repo = false,
-  $custom_repo_provider = undef,
   $custom_repo_source = undef,
   $web = true,
   $web_ssl_verify_client = 'none',
