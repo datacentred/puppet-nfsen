@@ -7,7 +7,6 @@ class nfsen::install {
   assert_private()
 
   $packages = [
-    'git',
     'libmailtools-perl',
     'librrds-perl',
     'perl',
