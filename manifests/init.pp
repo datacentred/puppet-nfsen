@@ -115,6 +115,9 @@
 # [*web_ssl_verify_depth*]
 #   Integer.  Number of (intermediate) CA certificates to verify
 #
+# [*nfdump_version*]
+#   String.  Version of nfdump to install
+#
 class nfsen (
   $basedir = '/var/lib/nfsen',
   $bindir = '/var/lib/nfsen/bin',
@@ -130,7 +133,7 @@ class nfsen (
   $profiledatadir = '/var/lib/nfsen/profiles-data',
   $backend_plugindir = '/var/lib/nfsen/plugins',
   $frontend_plugindir = '/var/www/html/nfsen/plugins',
-  $prefix = '/usr/bin',
+  $prefix = '/usr/local/bin',
   $commsocket = '/var/lib/nfsen/run/nfsen.comm',
   $user = 'netflow',
   $wwwuser = 'www-data',
@@ -161,6 +164,7 @@ class nfsen (
   $web = true,
   $web_ssl_verify_client = 'none',
   $web_ssl_verify_depth = 1,
+  $nfdump_version = '1.6.13',
 ) {
 
   include ::nfsen::nfdump
