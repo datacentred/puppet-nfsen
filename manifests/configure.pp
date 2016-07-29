@@ -44,6 +44,7 @@ class nfsen::configure {
   user { $_user:
     ensure => 'present',
     groups => $_wwwgroup,
+    system => true,
   } ->
 
   file { '/opt/nfsen/etc/nfsen.conf':
