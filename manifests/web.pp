@@ -12,6 +12,12 @@ class nfsen::web {
     include ::apache::mod::php
     include ::apache::mod::ssl
 
+    if versioncmp($::puppetversion, '4.0.0') >= 0 {
+      $_ssldir = '/etc/puppetlabs/puppet/ssl'
+    } else {
+      $_ssldir = '/var/lib/puppet/ssl'
+    }
+
     apache::vhost { 'nfsen':
       servername      => $::fqdn,
       port            => 80,
@@ -25,10 +31,10 @@ class nfsen::web {
       port              => 443,
       docroot           => '/var/www/html',
       ssl               => true,
-      ssl_cert          => "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
-      ssl_key           => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
-      ssl_ca            => '/var/lib/puppet/ssl/certs/ca.pem',
-      ssl_crl           => '/var/lib/puppet/ssl/crl.pem',
+      ssl_cert          => "${_ssldir}/certs/${::fqdn}.pem",
+      ssl_key           => "${_ssldir}/private_keys/${::fqdn}.pem",
+      ssl_ca            => "${_ssldir}/certs/ca.pem",
+      ssl_crl           => "${_ssldir}/crl.pem",
       ssl_verify_client => $::nfsen::web_ssl_verify_client,
       ssl_verify_depth  => $::nfsen::web_ssl_verify_depth,
     } ->

@@ -10,10 +10,13 @@ describe 'nfsen' do
       shell('ipcmk -S 1')
       # Create a CA and certificate for the web server
       shell('puppet cert generate $(facter fqdn)')
+
+      hiera_path = ENV['PUPPET_INSTALL_TYPE'] == 'agent' ? '/etc/puppetlabs/code/environments/production/hieradata' : '/var/lib/hiera'
+
       # Add in an MPM module for mod_php
-      shell('echo "apache::mpm_module: \'prefork\'" >> /var/lib/hiera/common.yaml')
+      shell("echo apache::mpm_module: 'prefork' >> #{hiera_path}/common.yaml")
       # Disable the default vhost
-      shell('echo "apache::default_vhost: false" >> /var/lib/hiera/common.yaml')
+      shell("echo apache::default_vhost: false >> #{hiera_path}/common.yaml")
 
       pp = <<-EOS
         Exec {
