@@ -1,18 +1,7 @@
 require 'beaker-rspec'
+require 'beaker/puppet_install_helper'
 
-config = {
-  'main' => {
-    'logdir' => '/var/log/puppet',
-    'vardir' => '/var/lib/puppet',
-    'ssldir' => '/var/lib/puppet/ssl',
-    'rundir' => '/var/run/puppet',
-  },
-}
-
-# Install latest puppet from puppetlabs.com
-on hosts, install_puppet
-# Explicitly configure puppet to avoid warnings
-configure_puppet(config)
+run_puppet_install_helper
 
 RSpec.configure do |c|
   module_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
@@ -20,13 +9,18 @@ RSpec.configure do |c|
   c.formatter = :documentation
 
   c.before :suite do
-    # Install this module for testing
-    puppet_module_install(:source => module_root, :module_name => 'nfsen')
+    hosts.each do |host|
+      # Install this module for testing
+      copy_module_to(host, :source => module_root, :module_name => 'nfsen')
 
-    on hosts, puppet('module', 'install', 'puppetlabs-apache'), { :acceptable_exit_codes => [0,1] }
-    on hosts, puppet('module', 'install', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
-    on hosts, puppet('module', 'install', 'puppetlabs-vcsrepo'), { :acceptable_exit_codes => [0,1] }
-    # Install EPEL on centos
-    on 'centos', 'rpm -i http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm'
+      on host, puppet('module', 'install', 'puppetlabs-apache'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module', 'install', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module', 'install', 'puppetlabs-vcsrepo'), { :acceptable_exit_codes => [0,1] }
+
+      # Install EPEL on centos
+      if host['platform'].start_with?('el')
+        on host, 'rpm -i http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm'
+      end
+    end
   end
 end

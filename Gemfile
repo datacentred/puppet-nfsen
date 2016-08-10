@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'puppet', '3.8.1'
+gem 'puppet'
 gem 'puppet-lint'
 gem 'rspec-puppet'
-gem 'beaker', '2.33.0'
+gem 'beaker'
 gem 'beaker-rspec'
 gem 'puppetlabs_spec_helper'
+gem 'beaker-puppet_install_helper'
+gem 'metadata-json-lint'
